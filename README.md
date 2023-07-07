@@ -1,6 +1,6 @@
-#Repaso Segundo Parcial 2023
+# Repaso Segundo Parcial 2023
 
-##Ejercicio 1
+## Ejercicio 1
 
 Escriba un programa que ejecute los siguientes hilos que utilizan datos almacenados en una **lista de 5 elementos**.
 
@@ -20,7 +20,7 @@ Utilizando Monitores, implementar la concurrencia del programa de modo que:
 - El hilo principal debe arrancar por lo menos 10 hilos de cada tipo (Productor y Consumidor).
 
 
-##Ejercicio 2
+## Ejercicio 2
 
 Escriba un programa que ejecute los siguientes hilos que utilizan datos almacenados en una **lista de 5 elementos**.
 
@@ -44,7 +44,7 @@ Utilizando Monitores, implementar la concurrencia del programa de modo que:
 - El hilo principal debe arrancar por lo menos 3 hilos de cada tipo (Productor y Consumidor).
 
 
-##Ejercicio 3
+## Ejercicio 3
 
 Escriba un programa que ejecute los siguientes hilos que utilizan datos almacenados en una **lista de 5 elementos**.
 
