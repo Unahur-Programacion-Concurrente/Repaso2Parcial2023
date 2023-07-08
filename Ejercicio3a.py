@@ -27,7 +27,7 @@ class listaMonitor():
 # Procedimientos exportados (publicos)
     def leerLista(self):
         with self.__lock:
-            while self.__consumos == 2:
+            while self.__consumos == 1:
                 self.__maxConsumos.wait()
             self.__consumos += 1
             self.__fueConsumido = True
@@ -70,17 +70,19 @@ class consumidor(threading.Thread):
         self.listaM = monitorL
         self.milista = []
 
+
     def calculaCuadrado(self, item ):
         logging.info(f'Calculo item {item[0]} = {item[1]**2}')
 
     def run(self):
         while True:
-            self.milista = self.listaM.leerLista()
-            executor.map(self.calculaCuadrado, list(enumerate(self.milista)))
-            time.sleep(1)
+            with ThreadPoolExecutor(5) as executor:
+                self.milista = self.listaM.leerLista()
+                executor.map(self.calculaCuadrado, list(enumerate(self.milista)))
+            time.sleep(2)
 
 
-executor = ThreadPoolExecutor(max_workers=5)
+#executor = ThreadPoolExecutor(max_workers=5)
 mon = listaMonitor()
 hilos = []
 for _ in range(3):
