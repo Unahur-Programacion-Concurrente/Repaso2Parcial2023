@@ -2,6 +2,7 @@ import threading
 import random
 import time
 import logging
+from concurrent.futures import ThreadPoolExecutor
 
 logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(threadName)s] - %(message)s', datefmt='%H:%M:%S', level=logging.INFO)
 
@@ -69,14 +70,18 @@ class consumidor(threading.Thread):
         self.listaM = monitorL
         self.milista = []
 
+    def calculaCuadrado(self, indice, valor ):
+        logging.info(f'Calculo item{indice} = {valor**2}')
+
     def run(self):
         while True:
-            self.milista = self.listaM.leerLista()
-            for indice, valor in enumerate(self.milista):
-                logging.info(f'Calculo item{indice} = {valor**2}')
+            self.miLista = self.listaM.leerLista()
+            for indice, valor in enumerate(self.miLista):
+                executor.submit(self.calculaCuadrado,indice, valor)
             time.sleep(1)
 
 
+executor = ThreadPoolExecutor(max_workers=5)
 mon = listaMonitor()
 hilos = []
 for _ in range(3):
@@ -87,3 +92,6 @@ for _ in range(3):
 
 for hilo in hilos:
     hilo.start()
+
+for hilo in hilos:
+    hilo.join()
